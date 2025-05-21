@@ -5,6 +5,9 @@ app_description = "Serial Consolidation"
 app_email = "sudamrathod022@gmail.com"
 app_license = "mit"
 
+jinja = {
+	"methods": ["serial_no.overrides.delivery_note.format_serial_ranges"],
+ }
 # Apps
 # ------------------
 
