@@ -16,8 +16,8 @@ def format_serial_ranges(bundle):
 
     for row in result:
         if row.serial_no:
-            # Split serial_no by comma, strip spaces, and add to serials list
-            serials.extend([s.strip() for s in row.serial_no.split(",") if s.strip()])
+            # Split serial_no by comma, remove any extra whitespace and empty strings
+            serials.extend([s.strip() for s in re.split(r"\s*,\s*", row.serial_no) if s.strip()])
 
     if not serials:
         return ""
