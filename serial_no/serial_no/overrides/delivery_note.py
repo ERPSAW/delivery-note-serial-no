@@ -56,14 +56,14 @@ def format_serial_ranges(bundle):
                 if len(group) == 1:
                     condensed_ranges.append(f"{prefix}{group[0]:0{padding}}")
                 else:
-                    condensed_ranges.append(f"{prefix}{group[0]:0{padding}} - {prefix}{group[-1]:0{padding}}")
+                    condensed_ranges.append(f"{prefix}{group[0]:0{padding}}-{prefix}{group[-1]:0{padding}}")
                 group = [num]
 
         if group:
             if len(group) == 1:
                 condensed_ranges.append(f"{prefix}{group[0]:0{padding}}")
             else:
-                condensed_ranges.append(f"{prefix}{group[0]:0{padding}} - {prefix}{group[-1]:0{padding}}")
+                condensed_ranges.append(f"{prefix}{group[0]:0{padding}}-{prefix}{group[-1]:0{padding}}")
 
     condensed_ranges.extend(invalid_serials)
 
