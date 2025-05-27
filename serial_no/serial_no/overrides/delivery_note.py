@@ -49,7 +49,7 @@ def format_serial_ranges(bundle):
                 if len(group) == 1:
                     condensed_ranges.append(f"{prefix}{group[0]:0{padding}}")
                 else:
-                    condensed_ranges.append(f"{prefix}{group[0]:0{padding}}...{group[-1]:0{padding}}")
+                    condensed_ranges.append(f"{prefix}{group[0]:0{padding}} - {group[-1]:0{padding}}")
                 group = [num]
 
         # Output last group
@@ -57,7 +57,7 @@ def format_serial_ranges(bundle):
             if len(group) == 1:
                 condensed_ranges.append(f"{prefix}{group[0]:0{padding}}")
             else:
-                condensed_ranges.append(f"{prefix}{group[0]:0{padding}}...{group[-1]:0{padding}}")
+                condensed_ranges.append(f"{prefix}{group[0]:0{padding}} - {group[-1]:0{padding}}")
 
     # Add invalid serials at the end
     condensed_ranges.extend(invalid_serials)
