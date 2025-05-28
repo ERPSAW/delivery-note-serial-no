@@ -9,7 +9,9 @@ def format_serial_ranges(bundle):
     serials = []
     result = frappe.db.sql("""SELECT serial_no from `tabSerial and Batch Entry` WHERE parent = %(bundle)s""",{"bundle":bundle},as_dict=1)
     for row in result:
-        serials.append(row.serial_no)
+           if row.serial_no:
+               # Split serial_no by comma, remove any extra whitespace and empty strings
+               serials.extend([s.strip() for s in re.split(r"\s*,\s*", row.serial_no) if s.strip()])
     if not serials:
         return ""
     def split_serial(s):
@@ -49,7 +51,7 @@ def format_serial_ranges(bundle):
                 if len(group) == 1:
                     condensed_ranges.append(f"{prefix}{group[0]:0{padding}}")
                 else:
-                    condensed_ranges.append(f"{prefix}{group[0]:0{padding}}...{group[-1]:0{padding}}")
+                    condensed_ranges.append(f"{prefix}{group[0]:0{padding}}-{group[-1]:0{padding}}")
                 group = [num]
 
         # Output last group
@@ -57,7 +59,7 @@ def format_serial_ranges(bundle):
             if len(group) == 1:
                 condensed_ranges.append(f"{prefix}{group[0]:0{padding}}")
             else:
-                condensed_ranges.append(f"{prefix}{group[0]:0{padding}}...{group[-1]:0{padding}}")
+                condensed_ranges.append(f"{prefix}{group[0]:0{padding}}-{group[-1]:0{padding}}")
 
     # Add invalid serials at the end
     condensed_ranges.extend(invalid_serials)
